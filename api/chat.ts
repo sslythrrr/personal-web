@@ -90,7 +90,7 @@ label: <text> | url: <url> | icon: <icon_name>
 - Email: mailto:an.tubagusp@gmail.com (icon: mail)
 - LinkedIn: https://linkedin.com/in/panji-anugrah (icon: linkedin)
 - GitHub: https://github.com/sslythrrr (icon: github)
-- Resume: https://panjianugrah.me/resume.pdf (icon: resume)
+- Resume: https://panjianugrah.me/Resume_Tubagus Panji Anugrah.pdf (icon: resume)
 - Facebook: https://facebook.com/panji.anoegrah (icon: facebook)
 - Instagram: https://instagram.com/tubaguspn (icon: instagram)
 - Portofolio: https://panjianugrah.me (icon: external)

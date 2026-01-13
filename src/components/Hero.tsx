@@ -28,7 +28,7 @@ const Hero = () => {
   };
 
   const handleResumeDownload = () => {
-    window.open("/resume.pdf", "_blank");
+    window.open("/Resume_Tubagus Panji Anugrah.pdf", "_blank");
   };
 
   return (
