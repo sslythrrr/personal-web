@@ -403,7 +403,7 @@ const Projects = () => {
       <section id="projects" className="pt-16 pb-20 md:pt-20 md:pb-28 px-6 overflow-hidden" ref={containerRef}>
         <motion.div className="max-w-7xl mx-auto" ref={ref} style={{ opacity: sectionOpacity }}>
           <motion.h2
-            className="text-section font-display mb-6"
+            className="text-section font-display mb-6 text-center md:mb-12"
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
@@ -413,7 +413,7 @@ const Projects = () => {
 
           {/* Filter Buttons */}
           <motion.div
-            className="flex flex-wrap gap-2 mb-8"
+            className="flex flex-wrap gap-1 mb-6"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
@@ -465,7 +465,6 @@ const Projects = () => {
               </button>
             </div>
           </motion.div>
-
           {/* Projects Carousel */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -478,7 +477,7 @@ const Projects = () => {
                 {filteredProjects.map((project, index) => (
                   <motion.div
                     key={project.id}
-                    className="flex-shrink-0 w-[280px] sm:w-[320px] md:w-[350px] pr-4"
+                    className="flex-shrink-0 w-[280px] sm:w-[280px] md:w-[320px] pr-3"
                     initial={{ opacity: 0, y: 20 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ 

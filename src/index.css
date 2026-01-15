@@ -130,6 +130,41 @@
   ::selection {
     @apply bg-accent/20 text-foreground;
   }
+
+  /* Custom Scrollbar - Elegant & Minimal */
+  /* Webkit browsers (Chrome, Safari, Edge) */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-muted/30 rounded-full;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary/40;
+    box-shadow: 0 0 8px hsla(0, 0%, 96%, 0.2);
+  }
+
+  ::-webkit-scrollbar-thumb:active {
+    @apply bg-primary/60;
+  }
+
+  /* Firefox */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--muted) / 0.3) transparent;
+  }
+
+  html:hover {
+    scrollbar-color: hsl(var(--primary) / 0.4) transparent;
+  }
 }
 
 @layer components {
