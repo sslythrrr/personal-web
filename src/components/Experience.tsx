@@ -359,7 +359,7 @@ const Experience = () => {
                   <DialogHeader>
                     <DialogTitle>Courses</DialogTitle>
                   </DialogHeader>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 mt-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-4">
                     {certifications.map((cert) => (
                       <a
                         key={cert.title}
