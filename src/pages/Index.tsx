@@ -122,7 +122,7 @@ const Index = () => {
         isLoading={isLoading}
         onFinish={handleLoadingFinish}
       />
-      
+
       {/* Main Content - Only render after loading */}
       {!isLoading && (
         <>

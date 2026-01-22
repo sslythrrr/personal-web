@@ -96,6 +96,7 @@
 
   /* Respect user's motion preferences */
   @media (prefers-reduced-motion: reduce) {
+
     *,
     *::before,
     *::after {
@@ -104,11 +105,11 @@
       transition-duration: 0.01ms !important;
       scroll-behavior: auto !important;
     }
-    
+
     body {
       cursor: auto !important;
     }
-    
+
     .custom-cursor,
     .custom-cursor-ring,
     .custom-cursor-dot {
@@ -504,7 +505,7 @@
   }
 }
 
-@keyframes border-chase{
+@keyframes border-chase {
   0% {
     clip-path: polygon(100% 100%, 100% 100%, 100% 100%, 100% 100%);
     opacity: 1;
@@ -579,7 +580,7 @@
     height: 100%;
     bottom: 0;
     right: 0;
-    border-bottom: 1px solid hsl(210, 20%, 85%); 
+    border-bottom: 1px solid hsl(210, 20%, 85%);
     border-left: 1px solid hsl(210, 20%, 85%);
     border-top: 1px solid hsl(210, 20%, 85%);
     border-right: none;

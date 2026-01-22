@@ -291,7 +291,7 @@ const Projects = () => {
     const img = new window.Image();
     img.src = src;
   };
-  
+
   const [activeFilters, setActiveFilters] = useState<string[]>(["All"]);
   const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -336,9 +336,9 @@ const Projects = () => {
   const filteredProjects = useMemo(() => {
     return projects.filter((project) => {
       // Category filter
-      const matchesCategory = activeFilters.includes("All") || 
+      const matchesCategory = activeFilters.includes("All") ||
         project.categories.some((cat) => activeFilters.includes(cat));
-      
+
       return matchesCategory;
     });
   }, [activeFilters]);
@@ -480,8 +480,8 @@ const Projects = () => {
                     className="flex-shrink-0 w-[280px] sm:w-[280px] md:w-[320px] pr-3"
                     initial={{ opacity: 0, y: 20 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ 
-                      duration: 0.5, 
+                    transition={{
+                      duration: 0.5,
                       delay: Math.min(index * 0.08, 0.4),
                       ease: [0.22, 1, 0.36, 1]
                     }}
