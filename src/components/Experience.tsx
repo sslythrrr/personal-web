@@ -7,10 +7,48 @@ import { useIsMobile } from "@/hooks/use-mobile";
 
 const experiences = [
   {
+    title: "Quality Assurance",
+    company: "Qiscus",
+    period: "Mar 2026 - Present",
+    duration: "6 months",
+    badge: "- Intern",
+    location: "Yogyakarta City, DIY, Indonesia · Hybrid",
+    description: [
+      "Assist in the development and execution of manual and automated test cases.",
+      "Collaborate with QA team members to identify, document, and track bugs.",
+      "Collaborate with project managers, developers, and stakeholders to define quality standards.",
+      "Record problems and issues; create logs to document testing phases and defects.",
+      "Report bugs and errors to development teams.",
+      "Participate in project development meetings and contribute to quality discussions.",
+      "Support regression, performance, and functional testing.",
+      "Maintain and update QA documentation, including test plans and reports.",
+      "Act as an AI Trainer by curating and labeling data to improve AI model performance.",
+      "Analyze AI outputs and provide feedback to enhance system accuracy.",
+      "Work closely with cross-functional teams to ensure product quality aligns with customer expectations.",
+    ],
+    tags: ["Quality Assurance", "QA Testing", "AI Training", "Test Documentation"],
+  },
+  {
+    title: "Assistant Lecturer",
+    company: "Universitas Pakuan",
+    period: "Mar 2026 - Present",
+    duration: "4 months",
+    badge: "- Part-time",
+    location: "Bogor City, West Java, Indonesia · Hybrid",
+    description: [
+      "Taught mobile programming practicum course using Flutter.",
+      "Taught UI/UX design course using Figma.",
+      "Assisted in preparing and adjusting course modules to align with curriculum objectives.",
+      "Instructed 3 vocational classes across mobile programming and UI/UX subjects.",
+    ],
+    tags: ["Flutter", "Figma", "Mobile Programming", "UI/UX", "Teaching"],
+  },
+  {
     title: "Mobile Developer",
     company: "Monfori Nusantara",
     period: "Aug 2024 - Sep 2024",
     duration: "2 months",
+    badge: "- Intern",
     location: "Bogor Regency, West Java, Indonesia · Hybrid",
     description: [
       "Built a production-ready Flutter application to streamline field documentation workflows for lab operations.",
@@ -26,6 +64,7 @@ const experiences = [
     company: "Universitas Pakuan",
     period: "Apr 2024 - Jul 2024",
     duration: "4 months",
+    badge: "- Community Service",
     location: "Bogor Regency, West Java, Indonesia · Hybrid",
     description: [
       "Participated in Student Community Service (KKN Tematik) program at Desa Tegal, Kecamatan Kemang.",
@@ -152,12 +191,12 @@ const Experience = () => {
                           transition: { duration: 0.3, ease: "easeOut" }
                         }}
                       >
-                        <div className={`flex flex-col ${index === 0 ? 'md:items-end' : ''}`}>
+                        <div className={`flex flex-col ${index % 2 === 0 ? 'md:items-end' : ''}`}>
                           <h3 className="text-lg md:text-xl font-display font-semibold mb-0 flex items-center gap-1">
                             {exp.title}
-                            {(index === 1 || index === 0) && (
+                            {exp.badge && (
                               <span className="ml-2 font-mono px-2 py-0.5 rounded align-middle" style={{ fontSize: '0.75em', fontWeight: 500, color: '#888' }}>
-                                {index === 0 ? '- Intern' : '- Volunteer'}
+                                {exp.badge}
                               </span>
                             )}
                           </h3>
@@ -177,13 +216,13 @@ const Experience = () => {
                           </span>
                         </div>
 
-                        <div className={`text-foreground/70 text-xs mb-2.5 ${index % 2 === 0 ? "md:text-right" : ""
+                        {/* <div className={`text-foreground/70 text-xs mb-2.5 ${index % 2 === 0 ? "md:text-right" : ""
                           }`}>
                           <span className="line-clamp-1">{exp.description[0]}</span>
                           <span className="text-foreground/50 italic text-[11px]">more...</span>
-                        </div>
+                        </div> */}
 
-                        <div className={`flex flex-wrap gap-1 ${index % 2 === 0 ? "md:justify-end" : ""
+                        {/* <div className={`flex flex-wrap gap-1 ${index % 2 === 0 ? "md:justify-end" : ""
                           }`}>
                           {exp.tags.map((tag, tagIndex) => (
                             <motion.span
@@ -199,7 +238,7 @@ const Experience = () => {
                               {tag}
                             </motion.span>
                           ))}
-                        </div>
+                        </div> */}
                       </motion.div>
                     </DialogTrigger>
                   </div>
@@ -279,9 +318,9 @@ const Experience = () => {
           </div>
         </motion.div>
 
-        {/* Certifications Subsection */}
-        <div className="mt-12 md:mt-20 mb-2 md:mb-8" ref={certRef}>
-          {/* Decorative divider */}
+        {/* Certifications Subsection
+        {/* <div className="mt-12 md:mt-20 mb-2 md:mb-8" ref={certRef}>
+          {/* Decorative divider
           <motion.div
             className="flex items-center gap-4 mb-8 md:mb-12"
             initial={{ opacity: 0 }}
@@ -294,7 +333,7 @@ const Experience = () => {
             </span>
             <div className="h-px flex-1 bg-gradient-to-l from-border to-transparent" />
           </motion.div>
-          {/* Certifications Grid - Compact Cards */}
+          {/* Certifications Grid - Compact Cards 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {displayedCerts.map((cert, index) => (
               <motion.a
@@ -310,7 +349,7 @@ const Experience = () => {
                 transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
                 whileHover={{ y: -2 }}
               >
-                {/* Content */}
+                {/* Content 
                 <div className="flex-1 min-w-0">
                   <h4 className="text-sm font-medium text-foreground/90 leading-snug
                                  group-hover:text-foreground transition-colors duration-300
@@ -324,7 +363,7 @@ const Experience = () => {
                   </div>
                 </div>
 
-                {/* Arrow Icon */}
+                {/* Arrow Icon 
                 <ExternalLink className="flex-shrink-0 w-3.5 h-3.5 text-muted-foreground/30
                                          group-hover:text-accent group-hover:translate-x-0.5 group-hover:-translate-y-0.5
                                          transition-all duration-300 mt-0.5" />
@@ -332,7 +371,7 @@ const Experience = () => {
             ))}
           </div>
 
-          {/* View All Certificates Button */}
+          {/* View All Certificates Button
           {remainingCount > 0 && (
             <motion.div
               className="mt-6 flex justify-center"
@@ -370,7 +409,7 @@ const Experience = () => {
                                    bg-secondary/20 rounded-lg
                                    hover:bg-secondary/40 transition-all duration-300"
                       >
-                        {/* Content */}
+                        {/* Content 
                         <div className="flex-1 min-w-0">
                           <h4 className="text-sm font-medium text-foreground/90 leading-snug
                                          group-hover:text-foreground transition-colors duration-300
@@ -384,7 +423,7 @@ const Experience = () => {
                           </div>
                         </div>
 
-                        {/* Arrow Icon */}
+                        {/* Arrow Icon 
                         <ExternalLink className="flex-shrink-0 w-3.5 h-3.5 text-muted-foreground/30
                                                  group-hover:text-accent group-hover:translate-x-0.5 group-hover:-translate-y-0.5
                                                  transition-all duration-300 mt-0.5" />
@@ -396,7 +435,7 @@ const Experience = () => {
             </motion.div>
           )}
 
-        </div>
+        </div> */}
 
       </div>
     </section>

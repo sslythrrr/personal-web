@@ -14,8 +14,9 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ["Inter", "system-ui", "sans-serif"],
-        display: ["Space Grotesk", "Inter", "sans-serif"],
+        sans: ["Lato", "sans-serif"],
+        display: ["Lato", "sans-serif"],
+        jetbrains: ["JetBrains Mono", "monospace"],
       },
       fontSize: {
         'hero': ['clamp(2.5rem, 8vw, 6rem)', { lineHeight: '1.05', fontWeight: '800' }],

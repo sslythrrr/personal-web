@@ -167,7 +167,7 @@ const botResponses: ResponseRule[] = [
     ],
   }
   ,
-    {
+  {
     keywords: ["portfolio", "showcase"],
     response: "This is it:",
     links: [
@@ -253,7 +253,7 @@ const parseGroqResponse = (text: string): { text: string; links?: LinkButton[] }
 
   const cleanText = text.replace(linkRegex, '').trim();
   const linksSection = match[1].trim();
-  
+
   const links: LinkButton[] = [];
   const lines = linksSection.split('\n').filter(line => line.trim());
 
@@ -483,7 +483,7 @@ const Chatbot = () => {
               opacity: 1,
               scale: 1,
               y: 0,
-              height: isMinimized ? "auto" : 420,
+              height: isMinimized ? "auto" : 360,
             }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
             transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}

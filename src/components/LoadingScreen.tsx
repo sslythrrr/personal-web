@@ -17,10 +17,13 @@ const LoadingScreen = ({ isLoading, onFinish }: LoadingScreenProps) => {
   const [show, setShow] = useState(true);
   const [fontReady, setFontReady] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [showSkipButton, setShowSkipButton] = useState(false);
 
   // Prevent multiple animation runs
   const isAnimatingRef = useRef(false);
   const hasFinishedRef = useRef(false);
+  const timeoutsRef = useRef<NodeJS.Timeout[]>([]);
+  const intervalsRef = useRef<NodeJS.Timeout[]>([]);
 
   // Block scroll when loading screen is active
   useEffect(() => {
@@ -55,6 +58,49 @@ const LoadingScreen = ({ isLoading, onFinish }: LoadingScreenProps) => {
     };
   }, []);
 
+  // Handle skip function
+  const handleSkip = () => {
+    if (hasFinishedRef.current) return;
+
+    // Clear all timeouts and intervals
+    timeoutsRef.current.forEach(clearTimeout);
+    intervalsRef.current.forEach(clearInterval);
+    timeoutsRef.current = [];
+    intervalsRef.current = [];
+
+    // Set to complete state
+    hasFinishedRef.current = true;
+    setProgress(100);
+    setShow(false);
+
+    if (onFinish) onFinish();
+  };
+
+  // Keyboard listener for Enter key
+  useEffect(() => {
+    if (!isLoading || !show || !fontReady) return;
+
+    const handleKeyPress = (e: KeyboardEvent) => {
+      if (e.key === "Enter") {
+        handleSkip();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyPress);
+    return () => window.removeEventListener("keydown", handleKeyPress);
+  }, [isLoading, show, fontReady]);
+
+  // Show skip button after delay
+  useEffect(() => {
+    if (!isLoading || !show || !fontReady) return;
+
+    const skipTimeout = setTimeout(() => {
+      setShowSkipButton(true);
+    }, 500);
+
+    return () => clearTimeout(skipTimeout);
+  }, [isLoading, show, fontReady]);
+
   useEffect(() => {
     // Guard: prevent multiple runs
     if (!isLoading || !fontReady || isAnimatingRef.current) return;
@@ -64,6 +110,7 @@ const LoadingScreen = ({ isLoading, onFinish }: LoadingScreenProps) => {
     setCurrentWordIndex(0);
     setShow(true);
     setProgress(0);
+    setShowSkipButton(false);
 
     let wordTimeouts: NodeJS.Timeout[] = [];
     let progressInterval: NodeJS.Timeout;
@@ -76,6 +123,7 @@ const LoadingScreen = ({ isLoading, onFinish }: LoadingScreenProps) => {
         return next >= 100 ? 100 : next;
       });
     }, 50);
+    intervalsRef.current.push(progressInterval);
 
     // Dynamic word timing with cumulative delays
     let cumulativeDelay = 0;
@@ -102,9 +150,11 @@ const LoadingScreen = ({ isLoading, onFinish }: LoadingScreenProps) => {
       }, END_DELAY);
     }, cumulativeDelay);
 
+    wordTimeouts.push(endTimeout);
+    timeoutsRef.current = wordTimeouts;
+
     return () => {
       wordTimeouts.forEach(clearTimeout);
-      clearTimeout(endTimeout);
       clearInterval(progressInterval);
       isAnimatingRef.current = false;
     };
@@ -128,7 +178,7 @@ const LoadingScreen = ({ isLoading, onFinish }: LoadingScreenProps) => {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.1, ease: "easeInOut" }}
-   
+
               >
                 {words[currentWordIndex]}
               </motion.h1>
@@ -143,6 +193,24 @@ const LoadingScreen = ({ isLoading, onFinish }: LoadingScreenProps) => {
             >
               {Math.round(progress)}%
             </motion.p>
+
+            {/* Skip Button */}
+            <AnimatePresence>
+              {showSkipButton && (
+                <motion.button
+                  onClick={handleSkip}
+                  className="mt-8 text-xs text-muted-foreground/50 hover:text-muted-foreground/80 transition-colors cursor-pointer font-mono uppercase tracking-wider hoverable"
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.3 }}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  Press Enter to Skip
+                </motion.button>
+              )}
+            </AnimatePresence>
           </div>
         </motion.div>
       )}

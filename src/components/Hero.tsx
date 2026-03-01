@@ -51,12 +51,12 @@ const Hero = () => {
         >
           {/* Main Name */}
           <motion.h1
-            className="text-hero font-display font-extrabold mb-6 cursor-default inline-flex justify-center w-full"
+            className="hero-text font-sans mb-4 cursor-default inline-flex justify-center w-full"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
           >
-            <span className="gradient-text relative group inline-block overflow-hidden">
+            <span className="gradient-text relative group inline-block overflow-hidden pb-1">
               <span
                 className={`absolute right-0 top-1 w-full h-[1px] bg-gradient-to-r from-transparent via-accent to-transparent pointer-events-none
                   ${(autoWave ? 'animate-wave-line2' : '')} group-hover:animate-wave-line2`}
@@ -72,14 +72,14 @@ const Hero = () => {
           </motion.h1>
 
           {/* Title */}
-          <motion.p
+          {/* <motion.p
             className="text-xl md:text-2xl text-foreground/90 font-medium mb-3"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2, ease: [0.4, 0, 0.2, 1] }}
           >
             Software Engineer
-          </motion.p>
+          </motion.p> */}
 
           {/* Specialties */}
           <motion.p
@@ -88,7 +88,7 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.35, ease: [0.4, 0, 0.2, 1] }}
           >
-            Mobile • Web • QA • Data Science
+            QA • Mobile • Web • Data Science
           </motion.p>
 
           {/* Resume Download Button */}

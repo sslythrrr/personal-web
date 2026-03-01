@@ -54,7 +54,7 @@ const About = () => {
   const profileInfo = {
     age: 22,
     location: "West Java, Indonesia",
-    imageUrl: "/profile.png"
+    imageUrl: "/profile.webp"
   };
 
   return (

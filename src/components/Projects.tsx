@@ -1,7 +1,5 @@
 import { useState, useRef, useCallback, useEffect, useMemo } from "react";
 import { motion, useInView, AnimatePresence, useScroll, useTransform } from "framer-motion";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import useEmblaCarousel from "embla-carousel-react";
 import ProjectModal from "./ProjectModal";
 
 const projects = [
@@ -299,25 +297,31 @@ const Projects = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { margin: "-100px" });
 
+  // Scroll container ref for arrow buttons
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  const handleScrollUp = () => {
+    if (!scrollContainerRef.current) return;
+    scrollContainerRef.current.scrollBy({
+      top: -300,
+      behavior: 'smooth'
+    });
+  };
+
+  const handleScrollDown = () => {
+    if (!scrollContainerRef.current) return;
+    scrollContainerRef.current.scrollBy({
+      top: 300,
+      behavior: 'smooth'
+    });
+  };
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"]
   });
 
   const sectionOpacity = useTransform(scrollYProgress, [0, 0.2, 0.5, 0.8, 1], [0.3, 1, 1, 1, 0.3]);
-
-  const [emblaRef, emblaApi] = useEmblaCarousel({
-    loop: false,
-    align: "start",
-    skipSnaps: false,
-    dragFree: true,
-    containScroll: "trimSnaps",
-  });
-
-  const [canScrollPrev, setCanScrollPrev] = useState(false);
-  const [canScrollNext, setCanScrollNext] = useState(false);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  // Remove hasAnimated, always animate on inView
 
   const toggleFilter = (filter: string) => {
     if (filter === "All") {
@@ -342,56 +346,6 @@ const Projects = () => {
       return matchesCategory;
     });
   }, [activeFilters]);
-
-  const scrollPrev = useCallback(() => {
-    if (emblaApi) emblaApi.scrollPrev();
-  }, [emblaApi]);
-
-  const scrollNext = useCallback(() => {
-    if (emblaApi) emblaApi.scrollNext();
-  }, [emblaApi]);
-
-  const onSelect = useCallback(() => {
-    if (!emblaApi) return;
-    setCanScrollPrev(emblaApi.canScrollPrev());
-    setCanScrollNext(emblaApi.canScrollNext());
-    setCurrentIndex(emblaApi.selectedScrollSnap());
-    // Preload next and previous images in carousel
-    const idx = emblaApi.selectedScrollSnap();
-    const nextIdx = idx + 1;
-    const prevIdx = idx - 1;
-    if (filteredProjects[nextIdx]?.images?.[0]) {
-      preloadImage(filteredProjects[nextIdx].images[0]);
-    }
-    if (filteredProjects[prevIdx]?.images?.[0]) {
-      preloadImage(filteredProjects[prevIdx].images[0]);
-    }
-  }, [emblaApi]);
-
-  useEffect(() => {
-    if (!emblaApi) return;
-    onSelect();
-    emblaApi.on("select", onSelect);
-    emblaApi.on("reInit", onSelect);
-    return () => {
-      emblaApi.off("select", onSelect);
-      emblaApi.off("reInit", onSelect);
-    };
-  }, [emblaApi, onSelect]);
-
-  useEffect(() => {
-    if (emblaApi) {
-      emblaApi.scrollTo(0);
-      emblaApi.reInit();
-    }
-  }, [activeFilters, emblaApi]);
-
-  // Simplified animation - let framer-motion handle it smoothly
-  useEffect(() => {
-    if (emblaApi) {
-      emblaApi.scrollTo(0);
-    }
-  }, [activeFilters, emblaApi]);
 
   const openProjectModal = (project: typeof projects[0]) => {
     setSelectedProject(project);
@@ -434,50 +388,66 @@ const Projects = () => {
             ))}
           </motion.div>
 
-          {/* Desktop Navigation Header */}
+          {/* Project Count */}
           <motion.div
-            className="hidden md:flex items-center justify-between mb-4"
+            className="text-sm text-muted-foreground mb-4"
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <div className="text-xs text-muted-foreground">
-              <span className="text-foreground">{currentIndex + 1}</span>
-              <span className="mx-1.5">/</span>
-              <span>{filteredProjects.length}</span>
-            </div>
-            <div className="flex gap-2">
-              <button
-                onClick={scrollPrev}
-                disabled={!canScrollPrev}
-                className="p-2 text-foreground/50 hover:text-foreground transition-colors hoverable disabled:opacity-30 disabled:cursor-not-allowed"
-                aria-label="Previous project"
-              >
-                <ChevronLeft className="w-5 h-5" />
-              </button>
-              <button
-                onClick={scrollNext}
-                disabled={!canScrollNext}
-                className="p-2 text-foreground/50 hover:text-foreground transition-colors hoverable disabled:opacity-30 disabled:cursor-not-allowed"
-                aria-label="Next project"
-              >
-                <ChevronRight className="w-5 h-5" />
-              </button>
-            </div>
+            <span className="text-foreground font-medium">{filteredProjects.length}</span> projects
           </motion.div>
-          {/* Projects Carousel */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <div className="overflow-hidden cursor-grab active:cursor-grabbing" ref={emblaRef} style={{ willChange: 'transform' }}>
-              <div className="flex" style={{ backfaceVisibility: 'hidden', transform: 'translateZ(0)' }}>
 
+          {/* Vertical Scrollable Grid with Arrow Controls */}
+          <div className="relative">
+            {/* Scroll Controls - Clustered at top right */}
+            <div className="absolute -top-12 right-0 z-10 flex gap-2">
+              {/* Scroll Up Arrow */}
+              <button
+                onClick={handleScrollUp}
+                className="p-2 bg-background/80 hover:bg-background border border-border rounded-full transition-all duration-200 hoverable group"
+                aria-label="Scroll up"
+              >
+                <svg
+                  className="w-4 h-4 text-foreground/60 group-hover:text-foreground transition-colors"
+                  fill="none"
+                  strokeWidth="2"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 15l7-7 7 7" />
+                </svg>
+              </button>
+
+              {/* Scroll Down Arrow */}
+              <button
+                onClick={handleScrollDown}
+                className="p-2 bg-background/80 hover:bg-background border border-border rounded-full transition-all duration-200 hoverable group"
+                aria-label="Scroll down"
+              >
+                <svg
+                  className="w-4 h-4 text-foreground/60 group-hover:text-foreground transition-colors"
+                  fill="none"
+                  strokeWidth="2"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+            </div>
+
+            <motion.div
+              ref={scrollContainerRef}
+              className="h-[500px] md:h-[500px] overflow-y-auto overflow-x-hidden pr-2 project-scrollbar"
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
                 {filteredProjects.map((project, index) => (
                   <motion.div
                     key={project.id}
-                    className="flex-shrink-0 w-[280px] sm:w-[280px] md:w-[320px] pr-3"
                     initial={{ opacity: 0, y: 20 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{
@@ -491,10 +461,10 @@ const Projects = () => {
                       className="w-full text-left group"
                       aria-label={`View details of ${project.title} project - ${project.categories.join(', ')}`}
                     >
-                      <article className="bg-card rounded-lg overflow-hidden transition-all duration-300 hover:translate-y-[-4px]">
-                        {/* Thumbnail - consistent dark gradient, always blurry bg, centered image */}
+                      <article className="bg-card roundedoverflow-hidden transition-all duration-300 hover:translate-y-[-4px]">
+                        {/* Thumbnail - hidden on mobile, visible on md+ */}
                         <div
-                          className={`aspect-[4/2.5] bg-gradient-to-br ${getProjectGradient()} relative overflow-hidden flex items-center justify-center`}
+                          className={`hidden md:flex aspect-[16/9] bg-gradient-to-br ${getProjectGradient()} relative overflow-hidden items-center justify-center`}
                         >
                           {project.images && project.images.length > 0 ? (
                             <>
@@ -504,7 +474,6 @@ const Projects = () => {
                                 alt=""
                                 className="absolute inset-0 w-full h-full object-cover scale-110 blur-lg opacity-50 pointer-events-none select-none"
                                 aria-hidden="true"
-
                               />
                               {/* Uniform dark overlay for all */}
                               <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-[#18181b]/100 to-black/90 opacity-100 pointer-events-none select-none" />
@@ -512,7 +481,7 @@ const Projects = () => {
                               <img
                                 src={project.images[0]}
                                 alt={`${project.title} - ${project.categories.join(', ')} project showcasing ${project.tags.slice(0, 3).join(', ')}`}
-                                className="relative z-10 max-h-[93%] max-w-[88%] object-contain rounded-md shadow-lg"
+                                className="relative z-10 max-h-[93%] max-w-[88%] object-contain"
                                 decoding="async"
                               />
                             </>
@@ -525,28 +494,28 @@ const Projects = () => {
                           )}
                         </div>
 
-                        {/* Compact Content */}
-                        <div className="p-4">
-                          <h3 className="text-sm font-display font-semibold leading-tight mb-1 group-hover:text-foreground transition-colors truncate">
+                        {/* Compact Content - smaller padding */}
+                        <div className="p-3">
+                          <h3 className="text-xs md:text-sm font-display font-semibold leading-tight mb-1 group-hover:text-foreground transition-colors truncate">
                             {project.title}
                           </h3>
-                          <p className="text-xs text-muted-foreground mb-2">
+                          <p className="text-[10px] md:text-xs text-muted-foreground mb-1.5">
                             {project.period}
                           </p>
                           {/* Description */}
-                          <p className="text-xs text-foreground/70 mb-2 line-clamp-2 min-h-[2.5em]">
+                          <p className="text-[10px] md:text-xs text-foreground/70 mb-1.5 line-clamp-1">
                             {project.description}
                           </p>
                           {/* Skill Tags */}
                           <div className="flex flex-wrap gap-1">
-                            {project.tags.slice(0, 3).map((tag) => (
-                              <span key={tag} className="px-1.5 py-0.5 text-[10px] bg-foreground/5 text-foreground/50 rounded truncate max-w-[90px]">
+                            {project.tags.slice(0, 2).map((tag) => (
+                              <span key={tag} className="px-1.5 py-0.5 text-[9px] md:text-[10px] bg-foreground/5 text-foreground/50 rounded truncate max-w-[80px]">
                                 {tag}
                               </span>
                             ))}
-                            {project.tags.length > 3 && (
-                              <span className="px-1.5 py-0.5 text-[10px] text-foreground/30">
-                                +{project.tags.length - 3}
+                            {project.tags.length > 2 && (
+                              <span className="px-1.5 py-0.5 text-[9px] md:text-[10px] text-foreground/30">
+                                +{project.tags.length - 2}
                               </span>
                             )}
                           </div>
@@ -556,47 +525,8 @@ const Projects = () => {
                   </motion.div>
                 ))}
               </div>
-            </div>
-          </motion.div>
-
-          {/* Mobile Navigation */}
-          <motion.div
-            className="flex md:hidden justify-center items-center gap-4 mt-6"
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.6, delay: 0.3 }}
-          >
-            <button
-              onClick={scrollPrev}
-              disabled={!canScrollPrev}
-              className="p-3 text-foreground/50 active:text-foreground transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
-              aria-label="Previous project"
-            >
-              <ChevronLeft className="w-6 h-6" />
-            </button>
-            <div className="flex gap-1.5">
-              {filteredProjects.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => emblaApi?.scrollTo(index)}
-                  className={`w-2 h-2 md:w-1.5 md:h-1.5 rounded-full transition-all duration-300 ${currentIndex === index
-                    ? "bg-foreground w-5 md:w-4"
-                    : "bg-foreground/20"
-                    }`}
-                  aria-label={`Go to project ${index + 1}`}
-                  aria-current={currentIndex === index ? 'true' : 'false'}
-                />
-              ))}
-            </div>
-            <button
-              onClick={scrollNext}
-              disabled={!canScrollNext}
-              className="p-3 text-foreground/50 active:text-foreground transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
-              aria-label="Next project"
-            >
-              <ChevronRight className="w-6 h-6" />
-            </button>
-          </motion.div>
+            </motion.div>
+          </div>
         </motion.div>
       </section>
       {/* Project Modal */}

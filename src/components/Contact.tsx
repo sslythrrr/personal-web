@@ -40,7 +40,7 @@ const Contact = () => {
 
   return (
     <section id="contact" className="pt-16 pb-20 md:pt-20 md:pb-28 px-6" ref={containerRef}>
-      <motion.div 
+      <motion.div
         className="max-w-2xl mx-auto text-center"
         ref={ref}
         style={{ y, opacity }}
@@ -90,8 +90,8 @@ const Contact = () => {
               className="group flex items-center justify-between p-4 md:p-5 border border-secondary rounded-lg hover:border-foreground/30 transition-all duration-300 hoverable magnetic-btn"
               initial={{ opacity: 0, x: -40, y: 20 }}
               animate={isInView ? { opacity: 1, x: 0, y: 0 } : { opacity: 0, x: -40, y: 20 }}
-              transition={{ 
-                duration: 0.2, 
+              transition={{
+                duration: 0.2,
                 delay: 0.2 + index * 0.1,
                 ease: [0.22, 1, 0.36, 1]
               }}
