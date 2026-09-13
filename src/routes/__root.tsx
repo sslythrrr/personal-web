@@ -82,18 +82,19 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "Built things during university. Now I test them. Computer Science graduate working in software quality.",
+          "I bridge the gap between how systems are built and how people actually use them. Computer Science graduate focused on software quality, product workflows, and keeping releases predictable. Based in West Java, Indonesia.",
       },
       { name: "author", content: "Tubagus Panji Anugrah" },
       {
         name: "keywords",
-        content: "Panji Anugrah, Tubagus Panji Anugrah, QA Engineer, Quality Assurance, Software Testing, QA Automation, Playwright, Selenium, Mobile Development, Kotlin, Flutter, Android, Bogor, Indonesia"
+        content:
+          "Tubagus Panji Anugrah, Panji Anugrah, Software Quality Assurance, QA Engineer, QA Manual, Quality Assurance, Software Testing, Katalon, Playwright, Product Workflows, West Java, Indonesia",
       },
       { property: "og:title", content: "Panji Anugrah — Personal Website" },
       {
         property: "og:description",
         content:
-          "Built things during university. Now I test them. Computer Science graduate working in software quality.",
+          "I bridge the gap between how systems are built and how people actually use them. Software Quality Assurance based in West Java, Indonesia.",
       },
       { property: "og:type", content: "website" },
       { property: "og:image", content: "https://panjianugrah.me/profile.webp" },
@@ -102,7 +103,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "twitter:description",
         content:
-          "Built things during university. Now I test them. Computer Science graduate working in software quality.",
+          "I bridge the gap between how systems are built and how people actually use them. Software Quality Assurance based in West Java, Indonesia.",
       },
       { name: "twitter:image", content: "https://panjianugrah.me/profile.webp" },
     ],
@@ -130,27 +131,42 @@ function RootShell({ children }: { children: ReactNode }) {
               "@context": "https://schema.org",
               "@type": "Person",
               name: "Tubagus Panji Anugrah",
-              alternateName: ["Panji Anugrah", "Tubagus Panji"],
+              alternateName: ["Panji Anugrah", "Tubagus Panji", "sslythrrr"],
               url: "https://panjianugrah.me",
-              image: "https://panjianugrah.me/icon.png",
-              jobTitle: "Computer Science Graduate | Software Engineer | AI/ML | QA Automation",
+              image: "https://panjianugrah.me/profile.webp",
+              jobTitle: "Software Quality Assurance",
               worksFor: {
                 "@type": "Organization",
-                name: "Freelance / Open to Work"
+                name: "Qiscus",
               },
               alumniOf: {
                 "@type": "CollegeOrUniversity",
-                name: "Universitas Pakuan"
+                name: "Universitas Pakuan",
               },
-              description: "Mobile Developer, QA Automation, and Data Scientist based in Indonesia.",
+              address: {
+                "@type": "PostalAddress",
+                addressRegion: "West Java",
+                addressCountry: "ID",
+              },
+              description:
+                "Software Quality Assurance professional with a computer science background, bridging system architecture and user needs.",
               sameAs: [
                 "https://www.linkedin.com/in/panji-anugrah",
                 "https://github.com/sslythrrr",
                 "https://instagram.com/tubaguspn",
-                "https://facebook.com/panji.anoegrah"
               ],
-              knowsAbout: ["Mobile Development", "QA Automation", "Data Engineering", "Machine Learning", "Natural Language Processing", "Data Science"]
-            })
+              knowsAbout: [
+                "Software Quality Assurance",
+                "Manual Testing",
+                "Exploratory Testing",
+                "Test Scenarios",
+                "Playwright",
+                "Katalon",
+                "Postman",
+                "Load Testing",
+                "Product Workflows",
+              ],
+            }),
           }}
         />
       </head>

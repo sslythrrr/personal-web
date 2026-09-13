@@ -8,7 +8,7 @@ export const Route = createFileRoute("/")({
       { title: "Panji Anugrah — Personal Website" },
       {
         name: "description",
-        content: "Built things during university. Now I test them. Computer Science graduate working in software quality.",
+        content: "I bridge the gap between how systems are built and how people actually use them. Computer Science graduate focused on software quality and product workflows. Based in West Java, Indonesia.",
       },
     ],
   }),

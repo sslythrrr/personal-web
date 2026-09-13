@@ -14,18 +14,21 @@ import { motion, useReducedMotion } from "motion/react";
 
 const tools = [
   { name: "Playwright", slug: "/playwright.svg" },
-  { name: "k6", slug: "k6" },
+  { name: "Katalon", slug: "/katalon.svg" },
   { name: "Postman", slug: "postman" },
-  { name: "Flutter", slug: "flutter" },
-  { name: "Kotlin", slug: "kotlin" },
-  { name: "Python", slug: "python" },
+  { name: "k6", slug: "k6" },
+  { name: "JMeter", slug: "apachejmeter" },
+  { name: "Figma", slug: "figma" },
   { name: "Notion", slug: "notion" },
-  { name: "Android", slug: "android" },
+  { name: "Sheets", slug: "googlesheets" },
+  { name: "Flutter", slug: "flutter" },
+  { name: "Python", slug: "python" },
+  { name: "TypeScript", slug: "typescript" },
+  { name: "Git", slug: "git" },
 ];
 
 export function BentoGrid() {
   const reduce = useReducedMotion();
-  const topExperiences = experiences.slice(0, 3);
   const topProjects = projects.slice(0, 3);
 
   return (
@@ -35,7 +38,7 @@ export function BentoGrid() {
         {/* TILE 1: BIO */}
         <div className="md:col-span-1 md:row-span-2 flex h-full">
           <PaperCard className="relative overflow-hidden w-full h-full flex flex-col justify-end p-6 md:p-7">
-            <div className="relative z-10 flex flex-col gap-4">
+            <div className="relative z-10 flex flex-col gap-3.5">
               <div className="flex items-center gap-2">
                 <span className="relative flex h-2.5 w-2.5">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
@@ -48,16 +51,15 @@ export function BentoGrid() {
                 <h1 className="text-4xl md:text-5xl font-semibold tracking-tight text-ink mb-1">
                   Panji Anugrah
                 </h1>
-                <p className="text-sm text-graphite">QA Engineer · Mobile Dev</p>
+                <p className="text-sm text-graphite font-normal">Software Quality Assurance</p>
               </div>
 
-              <p className="text-[15px] text-ink/80 leading-relaxed mt-2">
-                QA engineer specializing in manual and automation testing with Playwright. Built apps during university, now I help teams test and ship reliable software.
+              <p className="text-[14.5px] text-ink/80 leading-relaxed mt-1">
+                I bridge the gap between how systems are built and how people actually use them. Background in computer science, currently focused on software quality, product workflows, and keeping releases predictable.
               </p>
               
-              <div className="mt-2 inline-flex items-center gap-1.5 rounded-md border border-border/70 bg-secondary/50 px-2.5 py-1 text-xs mono text-graphite w-fit">
-                <span className="h-1.5 w-1.5 rounded-full bg-graphite/40" />
-                <span>Bogor, Indonesia</span>
+              <div className="mt-1">
+                <span className="mono text-xs text-graphite/70">West Java, Indonesia</span>
               </div>
             </div>
           </PaperCard>
@@ -93,21 +95,27 @@ export function BentoGrid() {
             <div className="absolute inset-0 grid-lines opacity-40 pointer-events-none" />
             <div className="relative z-10 flex flex-col h-full">
               <h2 className="text-2xl font-semibold tracking-tight mb-4">Work</h2>
-              <div className="space-y-3.5 flex-1 divide-y divide-border/40">
-                {topExperiences.map((exp, i) => (
-                  <div key={i} className={i > 0 ? "pt-3.5" : ""}>
-                    <div className="flex items-baseline justify-between gap-2">
-                      <h3 className="text-[13px] font-semibold text-ink leading-snug">{exp.role}</h3>
-                      <span className="mono text-[10px] text-graphite/80 shrink-0">{exp.period.split("—")[0].trim()}</span>
-                    </div>
-                    <p className="mono text-[10px] text-graphite mt-0.5">{exp.company}</p>
-                    <p className="text-[12.5px] text-graphite leading-relaxed mt-1">
-                      {i === 0 && "QA across 6 client projects. Playwright WhatsApp automation, load testing with k6 & JMeter, AI Trainer."}
-                      {i === 1 && "Assisting Flutter mobile programming practicum courses for two vocational classes."}
-                      {i === 2 && "Built Monfori Lens: batch image processing for 200-800 images & white-box testing."}
-                    </p>
+              <div className="space-y-4 flex-1 divide-y divide-border/40">
+                <div>
+                  <div className="flex items-baseline justify-between gap-2">
+                    <h3 className="text-[13.5px] font-semibold text-ink leading-snug">Quality Assurance (Intern)</h3>
+                    <span className="mono text-[10px] text-graphite/80 shrink-0">Mar 2026</span>
                   </div>
-                ))}
+                  <p className="mono text-[10.5px] text-graphite mt-0.5">Qiscus</p>
+                  <p className="text-[12.5px] text-graphite leading-relaxed mt-1.5">
+                    End-to-end testing across diverse client projects (functional, exploratory, regression). Cross-functional coordination, test scenario planning, and Notion bug tracking, supported by load testing and workflow automation.
+                  </p>
+                </div>
+                <div className="pt-4">
+                  <div className="flex items-baseline justify-between gap-2">
+                    <h3 className="text-[13.5px] font-semibold text-ink leading-snug">Mobile Developer (Intern)</h3>
+                    <span className="mono text-[10px] text-graphite/80 shrink-0">Aug 2024</span>
+                  </div>
+                  <p className="mono text-[10.5px] text-graphite mt-0.5">Monfori Nusantara</p>
+                  <p className="text-[12.5px] text-graphite leading-relaxed mt-1.5">
+                    Collaborated directly with the laboratory manager to discover and define field workflow requirements. Built Monfori Lens (Flutter), ran device performance testing, batch image processing, and facilitated UAT.
+                  </p>
+                </div>
               </div>
               <Link to="/career" className="mt-4 flex items-center gap-1 text-xs mono text-graphite hover:text-ink transition-colors">
                 <span>view full timeline</span>
@@ -125,13 +133,25 @@ export function BentoGrid() {
           className="md:col-span-1 md:row-span-1 block h-full outline-none group"
         >
           <PaperCard
-            tint="butter"
-            className="h-full w-full flex flex-col items-center justify-center text-center gap-2.5 group-hover:border-amber-300/80 transition-colors"
+            className="h-full w-full flex flex-col justify-between p-5 md:p-6 group-hover:border-graphite/40 transition-[border-color]"
           >
-            <FilePdf size={30} weight="light" className="text-ink/80 group-hover:text-ink transition-colors" />
-            <div>
-              <p className="text-base font-semibold text-ink">Download Resume</p>
-              <p className="mono text-[11px] text-graphite mt-0.5">PDF · Updated Mar 2026</p>
+            <div className="flex items-start justify-between gap-2">
+              <div className="flex items-center gap-2">
+                <FilePdf size={18} weight="light" className="text-graphite group-hover:text-ink transition-colors" />
+                <span className="mono text-[10px] uppercase tracking-widest text-graphite/70 font-medium">Curriculum Vitae</span>
+              </div>
+              <div className="h-6 w-6 rounded-full border border-border/80 flex items-center justify-center text-graphite/70 group-hover:text-ink group-hover:border-ink/40 transition-colors">
+                <ArrowUpRight size={12} weight="light" className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </div>
+            </div>
+
+            <div className="mt-4">
+              <p className="text-base font-semibold text-ink tracking-tight">
+                Download Resume
+              </p>
+              <p className="mono text-[11px] text-graphite/80 mt-0.5">
+                PDF format · 143 KB
+              </p>
             </div>
           </PaperCard>
         </a>
@@ -140,20 +160,20 @@ export function BentoGrid() {
         <div className="md:col-span-1 flex h-full">
           <PaperCard className="h-full w-full flex flex-col">
             <h2 className="text-lg font-semibold mb-2">Stack</h2>
-            <div className="grid grid-cols-4 gap-y-3 gap-x-2">
+            <div className="grid grid-cols-4 gap-y-2.5 gap-x-1.5 my-auto">
               {tools.map(t => (
-                <div key={t.name} className="flex flex-col items-center gap-1.5">
+                <div key={t.name} className="flex flex-col items-center gap-1">
                   <img
                     src={t.slug.startsWith("/") ? t.slug : `https://cdn.simpleicons.org/${t.slug}/525252`}
                     alt={t.name}
-                    className="h-5 w-5 opacity-75"
+                    className="h-4.5 w-4.5 opacity-75"
                     onError={e => { (e.target as HTMLImageElement).style.opacity = "0"; }}
                   />
-                  <span className="mono text-[10px] text-graphite font-medium text-center leading-tight">{t.name}</span>
+                  <span className="mono text-[9.5px] text-graphite font-medium text-center leading-tight truncate w-full">{t.name}</span>
                 </div>
               ))}
             </div>
-            <Link to="/toolbox" className="mt-auto pt-4 inline-flex items-center gap-1 text-[11px] mono text-graphite hover:text-ink transition-colors w-fit">
+            <Link to="/toolbox" className="mt-auto pt-3 inline-flex items-center gap-1 text-[11px] mono text-graphite hover:text-ink transition-colors w-fit">
               <span>all tools</span> <ArrowRight size={11} weight="light" />
             </Link>
           </PaperCard>

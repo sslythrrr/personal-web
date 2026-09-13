@@ -14,14 +14,18 @@ export const Route = createFileRoute("/toolbox")({
 
 const getSlug = (name: string) => {
   const map: Record<string, string> = {
+    "katalon": "/katalon.svg",
+    "katalon studio": "/katalon.svg",
     "playwright": "/playwright.svg",
     "selenium": "selenium",
     "apache jmeter": "apachejmeter",
     "k6": "k6",
     "postman": "postman",
     "notion": "notion",
+    "google sheets": "googlesheets",
     "google spreadsheet": "googlesheets",
     "javascript": "javascript",
+    "typescript": "typescript",
     "kotlin": "kotlin",
     "flutter": "flutter",
     "dart": "dart",
@@ -39,6 +43,8 @@ const getSlug = (name: string) => {
     "android studio": "androidstudio",
     "vscode": "visualstudiocode",
     "figma": "figma",
+    "git": "git",
+    "github": "github",
     "powerbi": "powerbi",
     "looker": "looker",
   };

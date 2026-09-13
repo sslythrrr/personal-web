@@ -1,8 +1,8 @@
 export const profile = {
   name: "Tubagus Panji Anugrah",
   alias: "Panji",
-  role: "Quality Assurance Engineer",
-  location: "Bogor, West Java, Indonesia",
+  role: "Software Quality Assurance",
+  location: "West Java, Indonesia",
   current: "QA Intern @ Qiscus",
   email: "an.tubagusp@gmail.com",
   website: "https://panjianugrah.me",
@@ -11,7 +11,7 @@ export const profile = {
     github: "https://github.com/sslythrrr",
     instagram: "https://instagram.com/tubaguspn",
   },
-  bio: "QA engineer with a soft spot for well-behaved software. I test, I break, I document — then I help teams ship with a little more confidence. Occasionally I build mobile apps and train models on the side.",
+  bio: "I bridge the gap between how systems are built and how people actually use them. Background in computer science, currently focused on software quality, product workflows, and keeping releases predictable.",
 };
 
 export const education = {
@@ -40,8 +40,8 @@ export const experiences: Experience[] = [
     period: "Mar 2026 — Present",
     location: "Yogyakarta, DIY (Hybrid)",
     responsibilities:
-      "Contributed across 6 client projects (healthcare, event, internal) and supported 3+ projects. Executed functional, exploratory, sanity, regression, and load testing with k6 and Apache JMeter. Automated WhatsApp workflows with Playwright, handled bug ticketing through Notion, and refined LLM chatbot knowledge as AI Trainer.",
-    skills: ["Manual Testing", "Playwright", "k6", "Apache JMeter", "Postman", "Notion", "AI Training", "UAT", "Regression Testing"],
+      "Contributed across diverse client projects (healthcare, event, internal) and internal products. Executed functional, exploratory, sanity, regression, and load testing. Planned test scenarios, managed bug ticketing through Notion, and supported team workflows with API validation and automation.",
+    skills: ["Manual Testing", "Test Scenarios", "Playwright", "k6", "Apache JMeter", "Postman", "Notion", "UAT", "Regression Testing"],
   },
   {
     company: "Universitas Pakuan",
@@ -58,8 +58,8 @@ export const experiences: Experience[] = [
     period: "Aug 2024 — Sep 2024",
     location: "Bogor (Hybrid)",
     responsibilities:
-      "Developed Monfori Lens (Flutter) to streamline laboratory documentation workflows. Performed white-box and performance testing on lab smartphones, built batch processing for 200–800 images per cycle with EXIF Quick Sort, and facilitated UAT before deployment.",
-    skills: ["Flutter", "Dart", "Android", "White-box Testing", "Performance Testing", "UAT"],
+      "Collaborated directly with the laboratory manager to discover and define field workflow requirements. Developed Monfori Lens (Flutter) to streamline tissue culture documentation, performed white-box and device performance testing on lab smartphones, engineered batch image processing, and facilitated UAT before deployment.",
+    skills: ["Flutter", "Dart", "Android", "Requirements Discovery", "White-box Testing", "Performance Testing", "UAT"],
   },
   {
     company: "Universitas Pakuan (Community Service)",
@@ -223,12 +223,13 @@ export const projects: Project[] = [
 ];
 
 export const skillGroups = [
-  { label: "Testing & QA", items: ["Playwright", "Apache JMeter", "k6", "Postman", "Notion", "Manual Testing", "UAT", "Regression Testing", "Performance Testing"] },
-  { label: "Mobile", items: ["Flutter", "Kotlin", "Dart", "Jetpack Compose", "Android"] },
-  { label: "Web / Backend", items: ["JavaScript", "Node.js", "Express", "Flask"] },
+  { label: "Testing & QA", items: ["Katalon", "Playwright", "Apache JMeter", "k6", "Postman", "Notion", "Manual Testing", "Test Scenarios", "UAT", "Regression Testing"] },
+  { label: "Design & Product", items: ["Figma", "Notion", "Google Sheets", "Requirements Discovery"] },
+  { label: "Mobile", items: ["Flutter", "Kotlin", "Dart", "Android"] },
+  { label: "Web / Backend", items: ["JavaScript", "TypeScript", "Node.js", "Express", "Flask"] },
   { label: "Data / AI", items: ["Python", "Pandas", "NumPy", "TensorFlow", "TFLite"] },
   { label: "Database", items: ["MySQL"] },
-  { label: "Tools", items: ["Notion", "Google Spreadsheet", "VSCode", "Android Studio", "Figma"] },
+  { label: "Dev Tools", items: ["Git", "GitHub", "VSCode", "Android Studio"] },
 ];
 
 export const certifications = [
